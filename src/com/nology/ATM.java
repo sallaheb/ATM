@@ -1,5 +1,7 @@
 package com.nology;
 
+import com.sun.source.tree.WhileLoopTree;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,18 +24,27 @@ public class ATM {
         Scanner s = new Scanner(System.in);
         System.out.println("Enter password");
 
-        // Get password
-        int userPassword = s.nextInt();
 
 
 
-
-
-
-        // Check whether password matches atm user
         for (Account user: ListOfUsers) {
+            // Get password
+            int userPassword = s.nextInt();
+            int attempts = 0;
 
-            while (user.getPassword() == userPassword) {
+            while (attempts <4 ) {
+                if (user.getPassword() != userPassword) {
+                    System.out.println("wrong pass " + attempts);
+                    attempts++;
+                    userPassword =s.nextInt();
+                    if(attempts == 4) {
+                        System.out.println("you have exceeded no. attempts"); s.close();
+                    }
+                } else break;
+            }
+
+
+            if (user.getPassword() == userPassword) {
 
                 boolean IsAuthenticated = true;
                 // to break out of the ATM System
@@ -74,9 +85,19 @@ public class ATM {
 
                 } while (IsAuthenticated);
 
-             break;
+                break;
             }
-         }
+        }
+
+
+
+        // Check whether password matches atm user
+//        for (Account user: ListOfUsers) {
+//            // Get password
+//            int userPassword = s.nextInt();
+//
+//
+//         }
 
     }
 }
