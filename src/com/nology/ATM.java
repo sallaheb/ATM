@@ -7,31 +7,32 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ATM {
-
+    private List<Account> atmUsers = new ArrayList<>();
 
     public ATM() {
 
+    }
 
-        // creating a user account for the ATM
-        Account atmUser = new Account("Ebrima",2468,1000);
-        Account atmUser2 = new Account("Naib",2668,1000);
 
-        List<Account> ListOfUsers = new ArrayList<>();
-        ListOfUsers.add(atmUser);
-        ListOfUsers.add(atmUser2);
+    public List<Account> getAtmUsers() {
+        return atmUsers;
+    }
 
-        // creating a scanner to take user input
-        Scanner s = new Scanner(System.in);
+    public void addAtmUsers (Account AtmUser) {
+        atmUsers.add(AtmUser);
+    }
+
+    public void system (Scanner s) {
+       // if statement to make sure
+        if (getAtmUsers().size() == 0) {
+            System.out.println("You will have to add users to the ATM");
+        } else {
+
         System.out.println("Enter password");
-
-
-
-
-        for (Account user: ListOfUsers) {
+        for (Account user: getAtmUsers()) {
             // Get password
             int userPassword = s.nextInt();
             int attempts = 0;
-
             while (attempts <4 ) {
                 if (user.getPassword() != userPassword) {
                     System.out.println("wrong pass " + attempts);
@@ -42,8 +43,7 @@ public class ATM {
                     }
                 } else break;
             }
-
-
+             // when password is correct
             if (user.getPassword() == userPassword) {
 
                 boolean IsAuthenticated = true;
@@ -89,15 +89,6 @@ public class ATM {
             }
         }
 
-
-
-        // Check whether password matches atm user
-//        for (Account user: ListOfUsers) {
-//            // Get password
-//            int userPassword = s.nextInt();
-//
-//
-//         }
-
+    }
     }
 }
